@@ -1,8 +1,8 @@
-from django.urls import path
+from django.urls import path # @UnresolvedImport
 from .views import ItemList
 
 appname = "shoppinglist"
 
 urlpatterns = [
-    path("list/", ItemList.as_view(), name="list"),
+    path("list/", ItemList.as_view(), name="list"),  # @UndefinedVariable
     ]

@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin # @UnresolvedImport
 from .models import Shop, Item
 
 # Register your models here.
