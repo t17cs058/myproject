@@ -1,11 +1,11 @@
 #from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView # @UnresolvedImport
 from .models import Item
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-from django.shortcuts import get_object_or_404
-from .forms import ItemBuy, ItemIdForm
-from django.views.generic.base import TemplateView
+from django.http import HttpResponseRedirect # @UnresolvedImport
+from django.urls import reverse # @UnresolvedImport
+from django.shortcuts import get_object_or_404 # @UnresolvedImport
+from .forms import ItemBuy, ItemIdForm # @UnresolvedImport
+from django.views.generic.base import TemplateView # @UnresolvedImport
 from lib2to3.fixes.fix_input import context
 
 class ItemList(ListView):

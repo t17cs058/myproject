@@ -1,4 +1,4 @@
-from django import forms
+from django import forms  # @UnresolvedImport
 
 class ItemBuy(forms.Form):
     status = (
