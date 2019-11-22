@@ -1,11 +1,11 @@
- {% extends "base.html" %}
+{% extends "base.html" %}
 
- {% block title %} Delete {% endblock %}
+{% block title %} Delete {% endblock %}
 
- {% block main %}
- <form action="{% url 'delete' %}" method="post">
- {% csrf_token %}
- {{ form }}
- <input type="submit"/>
- </form>
- {% endblock %}
+{% block main %}
+<form action="{% url 'delete' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit"/>
+</form>
+{% endblock %} 

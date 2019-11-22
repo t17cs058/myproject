@@ -3,8 +3,8 @@ from .models import Item
 from django.http import HttpResponseRedirect # @UnresolvedImport
 from django.urls import reverse # @UnresolvedImport
 from django.shortcuts import get_object_or_404 # @UnresolvedImport
-from .forms import ItemBuy 
-from django.views.generic.base import TemplateView
+from .forms import ItemBuy, ItemIdForm # @UnresolvedImport
+from django.views.generic.base import TemplateView # @UnresolvedImport
 from lib2to3.fixes.fix_input import context
 from django.views.generic.edit import CreateView
 
@@ -50,3 +50,18 @@ class ItemShowView(TemplateView):
 
 
 
+class ItemDeleteView(TemplateView):
+    model = Item
+    template_name = "shoppinglist/item_delete.html"
+    
+    def post(self, request, *args, **kwargs):
+        item_id = self.request.POST.get("item_id")
+        item = get_object_or_404(Item, pk=item_id)
+        item.delete()
+        return HttpResponseRedirect(reverse("list"))
+
+    def get_context_data(self, **kwarg):
+        context = super().get_context_data(**kwarg)
+        context["form"] = ItemIdForm()
+        return context
+    
