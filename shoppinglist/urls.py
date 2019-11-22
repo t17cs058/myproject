@@ -5,8 +5,7 @@ appname = "shoppinglist"
 
 urlpatterns = [
     path("list/", ItemList.as_view(), name="list"),  # @UndefinedVariable
-    path('add', ItemAddView.as_view(),name='add'),  # @UndefinedVariable
-    # path('show', ItemShowView.as_view(),name='show'), # @UndefinedVariable
-    # path('edit', ItemEditView.as_view(),name='edit'), # @UndefinedVariable
-    path("delete", ItemDeleteView.as_view(), name="delete"),  # @UndefinedVariable
+    path('add/', ItemAddView.as_view(),name='add'),  # @UndefinedVariable
+    path('show/', ItemShowView.as_view(),name='show'), # @UndefinedVariable
+    path("delete/", ItemDeleteView.as_view(), name="delete"),  # @UndefinedVariable
     ]
