@@ -5,5 +5,5 @@ appname = "shoppinglist"
 
 urlpatterns = [
     path("list/", ItemList.as_view(), name="list"),  # @UndefinedVariable
-    path("delete", ItemDeleteView.as_view(), name="delete"),  # @UndefinedVariable
+    path("delete/", ItemDeleteView.as_view(), name="delete"),  # @UndefinedVariable
     ]
