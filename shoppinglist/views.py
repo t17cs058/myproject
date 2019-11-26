@@ -4,7 +4,8 @@ from .models import Item
 from django.http import HttpResponseRedirect # @UnresolvedImport
 from django.urls import reverse # @UnresolvedImport
 from django.shortcuts import get_object_or_404 # @UnresolvedImport
-from .forms import ItemBuy, ItemIdForm, ItemForm
+from .forms import ItemBuy, ItemIdForm # @UnresolvedImport
+from django.views.generic.base import TemplateView # @UnresolvedImport
 from lib2to3.fixes.fix_input import context
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
@@ -24,7 +25,6 @@ class ItemList(ListView):
         context = super().get_context_data(**kwargs)
         context['form'] = ItemBuy()
         return context
-
 
 class ItemEditView(TemplateView):
     model = Item
@@ -49,3 +49,4 @@ class ItemEditView(TemplateView):
         context['form_id'] = ItemIdForm()
         context['form'] = ItemForm()
         return context
+
