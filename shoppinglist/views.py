@@ -7,6 +7,8 @@ from django.shortcuts import get_object_or_404 # @UnresolvedImport
 from .forms import ItemBuy, ItemIdForm # @UnresolvedImport
 from django.views.generic.base import TemplateView # @UnresolvedImport
 from lib2to3.fixes.fix_input import context
+from django.views.generic.edit import CreateView
+
 
 class ItemList(ListView):
     model = Item
@@ -38,4 +40,9 @@ class ItemDeleteView(TemplateView):
         context = super().get_context_data(**kwarg)
         context["form"] = ItemIdForm()
         return context
-    
+
+class ItemAddView(CreateView):
+    model = Item
+    fields = ('name', 'item_url', 'count', 'buy_date', 'shop')
+    template_name = 'shoppinglist/item_add.html'
+    success_url = 'list/'
