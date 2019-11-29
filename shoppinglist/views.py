@@ -88,4 +88,3 @@ class ItemDeleteView(TemplateView):
         context["form"] = ItemIdForm()
         return context
 
-
