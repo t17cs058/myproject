@@ -12,9 +12,15 @@
 </head>
 
 <body>
+	<div class="countainer">
+		<br>
+		<nav class="nav" >
+			<div class="ui header" style="margin: 0 auto">MyPage</div>
+		</nav>
+		<br>
+	</div>
 	<div class="ui grid">
 		<div class="four wide column">
-			<br><br><br>
 			<div class="ui vertical menu">
 				<a class="teal item" href="{% url 'list' %}">Home
 				</a>
@@ -35,15 +41,6 @@
 			</div>
 		</div>
 		<div class="twelve wide stretched column">
-
-			<div class="countainer">
-				<br>
-				<nav class="nav">
-					<div class="ui header">MyPage</div>
-				</nav>
-				<br>
-			</div>
-			<!-- <div class="ui segment">This is an stretched grid column. This segment will always match the tab height </div> -->
 			{% block main %}{% endblock %}
 		</div>
 	</div>
