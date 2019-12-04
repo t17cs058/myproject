@@ -1,27 +1,37 @@
 {% load static %}
 <!doctype html>
 <html lang="ja">
-	
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>{% block title %} 買い物リスト メインページ{% endblock %}</title>
-		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
-		<link rel="stylesheet" href="{% static "/bootstrap/css/bootstrap.min.css" %}">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %} 買い物リスト メインページ{% endblock %}</title>
+	<link rel="stylesheet" type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+	<link rel="stylesheet" href="{% static "/bootstrap/css/bootstrap.min.css" %}">
 </head>
 
 <body>
 	<div class="ui grid">
 		<div class="four wide column">
-			<div class="ui vertical fluid tabular menu">
-				<ul>
-					<br>
-					<li><a href="{% url 'list' %}">Home</a></li>
-					<li><a href="{% url 'add' %}">追加</a></li>
-					<li><a href="{% url 'show' %}">表示</a></li>
-					<li><a href="{% url 'edit' %}">変更</a></li>
-					<li><a href="{% url 'delete' %}">削除</a></li>
-				</ul>
+			<br><br><br>
+			<div class="ui vertical menu">
+				<a class="teal item" href="{% url 'list' %}">Home
+				</a>
+				<a class="teal item" href="{% url 'add' %}">追加
+				</a>
+				<a class="teal item" href="{% url 'show' %}">表示
+				</a>
+				<a class="teal item" href="{% url 'edit' %}">変更
+				</a>
+				<a class="teal item" href="{% url 'delete' %}">削除
+				</a>
+				<div class="item">
+					<div class="ui transparent icon input">
+						<input type="text" placeholder="ページ内を検索(未実装)">
+						<i class="search icon"></i>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="twelve wide stretched column">
