@@ -83,9 +83,16 @@ class ItemDeleteView(TemplateView):
         item.delete()
         return HttpResponseRedirect(reverse("list"))
 
-    def get_context_data(self, **kwarg):
+    #def get_context_data(self, **kwarg):
+    def get(self,request, *arg,**kwarg):
         context = super().get_context_data(**kwarg)
         context["form"] = ItemIdForm()
-        return context
+        print(kwarg.get("item_id"))
+        item = get_object_or_404(Item, pk=kwarg.get("item_id"))
+        item.delete()
+        return HttpResponseRedirect(reverse("list"))
+
+
+
 
 
