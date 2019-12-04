@@ -29,7 +29,7 @@
 		<td>{{ item.count }}</td>
 		<td>{{ item.buy_date }}</td>
 		<td>{% if item.buy == False %} <front color="red">Not yet</front>{% endif %}{% if item.buy == True %} Yet {% endif %}</td>
-		<td>編集</td>
+		<td><a href="{% url 'edit' item.id %}">編集</a></td>
 		<td><a href="{% url 'delete' item.id %}">削除</a></td>
 	</tr>
 {% endfor %}
