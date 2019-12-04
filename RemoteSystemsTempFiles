@@ -1,0 +1,20 @@
+tree f93610e39ebfa53a29df9b0167fbf04000bf9ba1
+parent 3b748c46de672f96860058321abf23a4ed57feea
+parent cef58a0a5e5fd0ab0564860061f8da946f23edf5
+author t17cs015 <56064182+t17cs015@users.noreply.github.com> 1575005861 +0900
+committer GitHub <noreply@github.com> 1575005861 +0900
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsBcBAABCAAQBQJd4K6lCRBK7hj4Ov3rIwAAdHIIAFV/ssMWwvgXhwEhjqFS0brT
+ vO9tJa/hSAC2hlYPqhd0Vqqc9T+ggJl9y1h+a3ceEMKxpnCvLQT3zzmMB1zj0IWl
+ GeO5lYKJSm9/jilXhWb4V6NWg0n094iyLqxKYm+F5NEO7AEk8X/O7nYJTPu7UCUA
+ uZFiTBbZy+NN9gyCTGzK9Mety2dl8TURMO4b94yW8Zkx1t7aAh3Wx3RyLyl59z9O
+ MrNhUWGQ3heNJTm1zWzQUmmI2jKrbMUiVbW3QGhJI2o6v/ScE3Vwq/mnRR7cPrPn
+ MAM6z9RODINPPB1JTah7OuICBZZvYg6YT7uCFOl9DQY6UkcC1gtqoxo+W3ERxoY=
+ =V4hk
+ -----END PGP SIGNATURE-----
+ 
+
+Merge pull request #14 from itsys-cs2019/makeedit
+
+Makeeditをマージします
