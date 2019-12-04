@@ -72,7 +72,6 @@ class ItemEditView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['form_id'] = ItemIdForm()
         context['form'] = ItemForm()
-        item = get_object_or_404(Item, pk=item_id)
         return context
 
 class ItemDeleteView(TemplateView):
