@@ -8,6 +8,7 @@ from django.views.generic.base import TemplateView # @UnresolvedImport
 from lib2to3.fixes.fix_input import context
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
+from django.views.generic.edit import UpdateView
 
 class ItemList(ListView):
     model = Item
@@ -84,7 +85,18 @@ class ItemDeleteView(TemplateView):
         return HttpResponseRedirect(reverse("list"))
 
     def get_context_data(self, **kwarg):
+    #def get(self, request, *arg, **kwarg):
         context = super().get_context_data(**kwarg)
-        context["form"] = ItemIdForm()
+        if( kwarg.get("item_id") == None ):
+            context["form"] = ItemIdForm()
+        else:  
+            context["form"] = ItemIdForm(initial={'item_id':kwarg.get("item_id")})
+        
+            print(kwarg.get("item_id"))
+            item = get_object_or_404(Item, pk=kwarg.get("item_id"))
+        #item.delete()
         return context
+    
+
+
 
