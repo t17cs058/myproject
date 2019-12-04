@@ -1,8 +1,5 @@
 from django.urls import path # @UnresolvedImport
-
 from .views import ItemList ,ItemAddView,ItemEditView, ItemShowView,ItemDeleteView # @UnresolvedImport
-
-
 
 appname = "shoppinglist"
 
@@ -13,8 +10,6 @@ urlpatterns = [
     path('edit', ItemEditView.as_view(),name='edit'),# @UndefinedVariable
     path('show', ItemShowView.as_view(),name='show'), # @UndefinedVariable
     path("delete", ItemDeleteView.as_view(), name="delete"),  # @UndefinedVariable
-    #path('delete/<int:item_id>', ItemDeleteView.as_view(), name='delete'),
     path('delete/<int:item_id>', ItemDeleteView.as_view(), name='delete')
-
 
     ]

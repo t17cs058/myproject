@@ -95,4 +95,3 @@ class ItemDeleteView(TemplateView):
 
 
 
-
