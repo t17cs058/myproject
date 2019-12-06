@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load custom_filters %}
+
 {% block title %} 個別リスト {% endblock %}
 
 {% block main %}
@@ -7,6 +9,47 @@
 	{% csrf_token %}
 	{{ form }}
 	<input type="submit" />
+</form>
+
+<form action="{% url "list" %}" method="get">
+    <div>
+        <label>名前</label>
+        <input type="search" id="filter_name" name="name" placeholder="なまえ" value={{ request.GET|name }}>
+        <select type="search" id="order_name" name="oname" value={{ request.GET|name }}>
+            <option value="0">昇順</option>
+            <option value="1">降順</option>
+        </select>
+    </div>
+    <div>
+        <label>個数</label>
+        <input type="search" id="filter_count" name="count" placeholder="かず" value={{ request.GET|count }}>
+    </div>
+    <div>
+        <label>期日</label>
+        <input type="search" id="filter_buy_date" name="buy_date" placeholder="ひづけ" value={{ request.GET|buy_date }}>
+    </div>
+    <div>
+        <label>購入</label>
+        <select type="search" id="filter_buy" name="buy" value={{ request.GET|buy }}>
+            <option value="0">未選択</option>
+            <option value="1">購入済</option>
+            <option value="2">未購入</option>
+        </select>
+    </div>
+    ソート:
+    <select type="search" id="order_kind" name="order_kind" value={{ request.GET|order_kind }}>
+        <option value="0">名前</option>
+        <option value="1">個数</option>
+        <option value="2">期日</option>
+    </select>
+    で
+    <select type="search" id="order_by" name="order_by" value={{ request.GET|order_by }}>
+        <option value="0">昇順</option>
+        <option value="1">降順</option>
+    </select>
+    にソート
+    <br>
+    <button id="filter">検索、ソート</button>
 </form>
 
 <table class="table">
