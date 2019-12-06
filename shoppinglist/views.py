@@ -10,6 +10,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
 
+
 class ItemList(ListView):
     model = Item
 
@@ -50,7 +51,8 @@ class ItemShowView(TemplateView):
         return context
 
 
-class ItemEditView(TemplateView):
+
+class ItemEditView(TemplateView,):
     model = Item
     template_name = 'shoppinglist/item_edit.html'
     success_url = 'list/'
@@ -68,11 +70,20 @@ class ItemEditView(TemplateView):
         item.save()
         return HttpResponseRedirect(reverse('list'))
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form_id'] = ItemIdForm()
-        context['form'] = ItemForm()
-        return context
+    def get_context_data(self, **kwarg):
+        context = super().get_context_data(**kwarg)
+        if( kwarg.get("item_id") == None ):
+            context["form_id"] = ItemIdForm()
+            context['form'] = ItemForm()
+            return context
+        else:  
+            context["form_id"] = ItemIdForm(initial={'item_id':kwarg.get("item_id")})
+            item = Item.objects.get(pk=kwarg.get("item_id"))
+            context['form'] = ItemForm(initial={'name':item.name,"item_url":item.item_url,'count':item.count,'buy_date':item.buy_date})
+
+            return context
+
+
 
 class ItemDeleteView(TemplateView):
     model = Item
@@ -85,7 +96,7 @@ class ItemDeleteView(TemplateView):
         return HttpResponseRedirect(reverse("list"))
 
     def get_context_data(self, **kwarg):
-    #def get(self, request, *arg, **kwarg):
+    
         context = super().get_context_data(**kwarg)
         if( kwarg.get("item_id") == None ):
             context["form"] = ItemIdForm()
@@ -94,7 +105,7 @@ class ItemDeleteView(TemplateView):
         
             print(kwarg.get("item_id"))
             item = get_object_or_404(Item, pk=kwarg.get("item_id"))
-        #item.delete()
+        
         return context
     
 

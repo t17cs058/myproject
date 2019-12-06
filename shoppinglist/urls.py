@@ -12,5 +12,7 @@ urlpatterns = [
     path("delete", ItemDeleteView.as_view(), name="delete"),  # @UndefinedVariable
     path('delete/<int:item_id>', ItemDeleteView.as_view(), name='delete'),
     path('edit/<int:item_id>', ItemEditView.as_view(), name='edit'),
+    # path('edit/<int:pk>', ItemEditView.as_view(), name='edit'),
+    # r'^(?P<pk>[0-9]+)/$
 
     ]
