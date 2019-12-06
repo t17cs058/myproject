@@ -26,7 +26,7 @@
 	{% for item in object_list %}
 	<tr>
 		<td scope="row">{{ item.id }}</td>
-		<td>{{ item.name }}</td>
+		<td><a href={{item.item_url}}>{{item.name }}</a></td>
 		<td>{{ item.count }}</td>
 		<td>{{ item.buy_date }}</td>
 		<td>{% if item.buy == False %} <front color="red">Not yet</front>{% endif %}{% if item.buy == True %} Yet {% endif %}</td>
@@ -37,10 +37,4 @@
 {% endfor %}
 </tbody>
 </table>
-<ul>
-<li><a href="{% url 'add' %}">追加</a></li>
-<li><a href="{% url 'show' %}">表示</a></li>
-<li><a href="{% url 'edit' %}">変更</a></li>
-<li><a href="{% url 'delete' %}">削除</a></li>
-</ul>
 {% endblock %}

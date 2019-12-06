@@ -52,7 +52,8 @@ class ItemShowView(TemplateView):
         return context
 
 
-class ItemEditView(TemplateView):
+
+class ItemEditView(TemplateView,):
     model = Item
     template_name = 'shoppinglist/item_edit.html'
     success_url = 'list/'
@@ -70,11 +71,20 @@ class ItemEditView(TemplateView):
         item.save()
         return HttpResponseRedirect(reverse('list'))
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form_id'] = ItemIdForm()
-        context['form'] = ItemForm()
-        return context
+    def get_context_data(self, **kwarg):
+        context = super().get_context_data(**kwarg)
+        if( kwarg.get("item_id") == None ):
+            context["form_id"] = ItemIdForm()
+            context['form'] = ItemForm()
+            return context
+        else:  
+            context["form_id"] = ItemIdForm(initial={'item_id':kwarg.get("item_id")})
+            item = Item.objects.get(pk=kwarg.get("item_id"))
+            context['form'] = ItemForm(initial={'name':item.name,"item_url":item.item_url,'count':item.count,'buy_date':item.buy_date})
+
+            return context
+
+
 
 class ItemDeleteView(TemplateView):
     model = Item

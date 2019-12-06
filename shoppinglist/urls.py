@@ -15,5 +15,7 @@ urlpatterns = [
     path('edit/<int:item_id>', ItemEditView.as_view(), name='edit'),
     path('list/<int:item_id>', ItemList.as_view(), name='list'),
     path("buy/<int:item_id>", ItemBuyView.as_view(), name="buy"),
+    # path('edit/<int:pk>', ItemEditView.as_view(), name='edit'),
+    # r'^(?P<pk>[0-9]+)/$
 
     ]
