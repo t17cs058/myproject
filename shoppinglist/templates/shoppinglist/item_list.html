@@ -19,6 +19,7 @@
 			<th>済み?</th>
 			<th>編集</th>
 			<th>削除</th>
+			<th>購入</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -31,6 +32,7 @@
 		<td>{% if item.buy == False %} <front color="red">Not yet</front>{% endif %}{% if item.buy == True %} Yet {% endif %}</td>
 		<td><a href="{% url 'edit' item.id %}">編集</a></td>
 		<td><a href="{% url 'delete' item.id %}">削除</a></td>
+		<td><a href="{% url 'buy' item.id %}">購入</a></td>
 	</tr>
 {% endfor %}
 </tbody>
