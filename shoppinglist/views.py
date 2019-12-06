@@ -9,10 +9,12 @@ from lib2to3.fixes.fix_input import context
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
+from django.db.models import Q # @UnresolvedImpor
 
 
 class ItemList(ListView):
     model = Item
+    names = [ "きてれつ", "とんがり" ]
 
     def post(self, request, *args, **kwargs):
         item_id = self.request.POST.get('item_id')
@@ -27,7 +29,40 @@ class ItemList(ListView):
         context['form'] = ItemBuy()
         return context
 
-    
+    def get_queryset(self):
+        q = Item.objects.all()
+        if (self.request.GET.get("name") != ""):
+            q = q.filter(Q(name=self.request.GET.get("name")))
+        if (self.request.GET.get("count") != ""):
+            q = q.filter(Q(count=self.request.GET.get("count")))
+        if (self.request.GET.get("buy_date") != ""):
+            q = q.filter(Q(buy_date=self.request.GET.get("buy_date")))
+        if (self.request.GET.get("buy") == "1"):
+            q = q.filter(Q(buy=1))
+        elif (self.request.GET.get("buy") == "2"):
+            q = q.filter(Q(buy=0))
+        print(self.request.GET.get("order_by"))
+        if (self.request.GET.get("order_kind") == "0"):
+            if(self.request.GET.get("order_by")=="0"):
+                q = q.order_by("name")
+            elif(self.request.GET.get("order_by")=="1"):
+                q = q.order_by("name").reverse()
+
+        elif (self.request.GET.get("order_kind") == "1"):
+            if(self.request.GET.get("order_by")=="0"):
+                q = q.order_by("count")
+            elif(self.request.GET.get("order_by")=="1"):
+                q = q.order_by("count").reverse()
+
+        elif (self.request.GET.get("order_kind") == "2"):
+            if(self.request.GET.get("order_by")=="0"):
+                q = q.order_by("buy_date")
+            elif(self.request.GET.get("order_by")=="1"):
+                q = q.order_by("buy_date").reverse()
+
+        return q
+
+
 class ItemAddView(CreateView):
     model = Item
     fields = ('name', 'item_url', 'count', 'buy_date', 'shop')
