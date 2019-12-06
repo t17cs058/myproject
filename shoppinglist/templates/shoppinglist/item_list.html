@@ -62,18 +62,20 @@
 			<th>済み?</th>
 			<th>編集</th>
 			<th>削除</th>
+			<th>購入</th>
 		</tr>
 	</thead>
 	<tbody>
 	{% for item in object_list %}
 	<tr>
 		<td scope="row">{{ item.id }}</td>
-		<td>{{ item.name }}</td>
+		<td><a href={{item.item_url}}>{{item.name }}</a></td>
 		<td>{{ item.count }}</td>
 		<td>{{ item.buy_date }}</td>
 		<td>{% if item.buy == False %} <front color="red">Not yet</front>{% endif %}{% if item.buy == True %} Yet {% endif %}</td>
 		<td><a href="{% url 'edit' item.id %}">編集</a></td>
 		<td><a href="{% url 'delete' item.id %}">削除</a></td>
+		<td><a href="{% url 'buy' item.id %}">購入</a></td>
 	</tr>
 {% endfor %}
 </tbody>

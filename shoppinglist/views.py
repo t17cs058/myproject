@@ -62,6 +62,7 @@ class ItemList(ListView):
 
         return q
 
+
 class ItemAddView(CreateView):
     model = Item
     fields = ('name', 'item_url', 'count', 'buy_date', 'shop')
@@ -131,18 +132,37 @@ class ItemDeleteView(TemplateView):
         return HttpResponseRedirect(reverse("list"))
 
     def get_context_data(self, **kwarg):
-    
         context = super().get_context_data(**kwarg)
         if( kwarg.get("item_id") == None ):
             context["form"] = ItemIdForm()
         else:  
             context["form"] = ItemIdForm(initial={'item_id':kwarg.get("item_id")})
-        
-            print(kwarg.get("item_id"))
             item = get_object_or_404(Item, pk=kwarg.get("item_id"))
-        
         return context
     
+class ItemBuyView(TemplateView):
+    model = Item
+    template_name = "shoppinglist/item_buy.html"
+ 
+    def post(self, request, *args, **kwargs):
+        item_id = self.request.POST.get("item_id")
+        item = get_object_or_404(Item, pk=item_id)
+        if( item.buy == 0):
+            item.buy = 1
+        else:
+            item.buy = 0
+        return HttpResponseRedirect(reverse("list"))
+ 
+    def get(self, request, *arg, **kwarg):
+        context = super().get_context_data(**kwarg)
+        context["form"] = ItemIdForm()
+        item = get_object_or_404(Item, pk=kwarg.get("item_id"))
+        if( item.buy == 0):
+            item.buy = 1
+        else:
+            item.buy = 0
+        item.save()
+        return HttpResponseRedirect(reverse("list"))
 
 
 
