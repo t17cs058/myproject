@@ -9,10 +9,12 @@ from lib2to3.fixes.fix_input import context
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
+from django.db.models import Q # @UnresolvedImpor
 
 
 class ItemList(ListView):
     model = Item
+    names = [ "きてれつ", "とんがり" ]
 
     def post(self, request, *args, **kwargs):
         item_id = self.request.POST.get('item_id')
@@ -26,6 +28,40 @@ class ItemList(ListView):
         context = super().get_context_data(**kwargs)
         context['form'] = ItemBuy()
         return context
+
+    def get_queryset(self):
+        q = Item.objects.all()
+        if (self.request.GET.get("name") != ""):
+            q = q.filter(Q(name=self.request.GET.get("name")))
+        if (self.request.GET.get("count") != ""):
+            q = q.filter(Q(count=self.request.GET.get("count")))
+        if (self.request.GET.get("buy_date") != ""):
+            q = q.filter(Q(buy_date=self.request.GET.get("buy_date")))
+        if (self.request.GET.get("buy") == "1"):
+            q = q.filter(Q(buy=1))
+        elif (self.request.GET.get("buy") == "2"):
+            q = q.filter(Q(buy=0))
+        print(self.request.GET.get("order_by"))
+        if (self.request.GET.get("order_kind") == "0"):
+            if(self.request.GET.get("order_by")=="0"):
+                q = q.order_by("name")
+            elif(self.request.GET.get("order_by")=="1"):
+                q = q.order_by("name").reverse()
+
+        elif (self.request.GET.get("order_kind") == "1"):
+            if(self.request.GET.get("order_by")=="0"):
+                q = q.order_by("count")
+            elif(self.request.GET.get("order_by")=="1"):
+                q = q.order_by("count").reverse()
+
+        elif (self.request.GET.get("order_kind") == "2"):
+            if(self.request.GET.get("order_by")=="0"):
+                q = q.order_by("buy_date")
+            elif(self.request.GET.get("order_by")=="1"):
+                q = q.order_by("buy_date").reverse()
+
+        return q
+
 
 class ItemAddView(CreateView):
     model = Item
@@ -96,18 +132,37 @@ class ItemDeleteView(TemplateView):
         return HttpResponseRedirect(reverse("list"))
 
     def get_context_data(self, **kwarg):
-    
         context = super().get_context_data(**kwarg)
         if( kwarg.get("item_id") == None ):
             context["form"] = ItemIdForm()
         else:  
             context["form"] = ItemIdForm(initial={'item_id':kwarg.get("item_id")})
-        
-            print(kwarg.get("item_id"))
             item = get_object_or_404(Item, pk=kwarg.get("item_id"))
-        
         return context
     
+class ItemBuyView(TemplateView):
+    model = Item
+    template_name = "shoppinglist/item_buy.html"
+ 
+    def post(self, request, *args, **kwargs):
+        item_id = self.request.POST.get("item_id")
+        item = get_object_or_404(Item, pk=item_id)
+        if( item.buy == 0):
+            item.buy = 1
+        else:
+            item.buy = 0
+        return HttpResponseRedirect(reverse("list"))
+ 
+    def get(self, request, *arg, **kwarg):
+        context = super().get_context_data(**kwarg)
+        context["form"] = ItemIdForm()
+        item = get_object_or_404(Item, pk=kwarg.get("item_id"))
+        if( item.buy == 0):
+            item.buy = 1
+        else:
+            item.buy = 0
+        item.save()
+        return HttpResponseRedirect(reverse("list"))
 
 
 
